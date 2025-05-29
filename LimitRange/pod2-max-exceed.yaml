@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod-max-exceed
+  namespace: lr-test
+spec:
+  containers:
+    - name: nginx-a
+      image: nginx:stable
+      resources:
+        requests:
+          cpu: "300m"
+        limits:
+          cpu: "300m"
+    - name: nginx-b
+      image: nginx:stable
+      resources:
+        requests:
+          cpu: "300m"
+        limits:
+          cpu: "300m"
