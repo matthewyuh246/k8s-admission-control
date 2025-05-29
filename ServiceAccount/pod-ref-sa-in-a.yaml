@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ns-b
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-cross-sa
+  namespace: ns-b
+spec:
+  serviceAccountName: sa-a # 別のネームスペース(ns-a)のSAを指定
+  containers:
+    - name: nginx
+      image: nginx:stable
