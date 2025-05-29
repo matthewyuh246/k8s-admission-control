@@ -1,0 +1,25 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+kubeadmConfigPatches:
+  - |
+    kind: ClusterConfiguration
+    apiServer:
+      authorizationMode: "RBAC"
+      extraArgs:
+        enable-admission-plugins: |
+          NamespaceLifecycle,
+          LimitRanger,
+          ServiceAccount,
+          DefaultStorageClass,
+          DefaultIngressClass,
+          MutatingAdmissionWebhook,
+          ValidatingAdmissioWebhook,
+          ResourceQuota,
+          PodSecurity,
+        disable-admission-plugins: |
+          AlwaysAdmit,
+          AlowaysPullImages
+
+nodes:
+  - role: control-plane
+  - role: worker
