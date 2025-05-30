@@ -1,0 +1,15 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: fast-sc
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true" # ← これがデフォルトにするためのキー
+provisioner: kubernetes.io/no-provisioner # テスト用に動的プロビジョニングは無効
+volumeBindingMode: Immediate
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: slow-sc
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: Immediate
