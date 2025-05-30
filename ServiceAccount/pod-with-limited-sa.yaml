@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-noperms
+  namespace: default
+spec:
+  serviceAccountName: sa-limited
+  containers:
+    - name: curl
+      image: curlimages/curl
+      command:
+        - sh
+        - -c
+        - |
+          # Pod内からK8s APIへGET /api
+          curl -sS --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt \
+            -H "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
+            https://kubernetes.default.svc/api || echo "FAIL"
+
+          # Podを継続的に実行状態に保つ
+          echo "API test completed. Keeping pod running..."
+          sleep 3600
