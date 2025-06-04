@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-restricted-violate
+  namespace: ns-restricted
+spec:
+  securityContext:
+    runAsNonRoot: false # root 実行を許可
+  containers:
+    - name: busybox
+      image: busybox
+      command: ["sh", "-c", "sleep 3600"]
+      securityContext:
+        runAsNonRoot: false
+        readOnlyRootFilesystem: false
