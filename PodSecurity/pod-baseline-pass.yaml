@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-baseline-pass
+  namespace: ns-baseline
+spec:
+  securityContext:
+    runAsNonRoot: true
+  containers:
+    - name: nginx
+      image: nginx:stable
+      securityContext:
+        runAsNonRoot: true
+        allowPrivilegeEscalation: false
