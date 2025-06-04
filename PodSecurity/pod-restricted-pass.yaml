@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-restricted-pass
+  namespace: ns-restricted
+spec:
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    # Pod 全体にも seccompProfile を設定しておくとよい（コンテナ個別でも可）
+    seccompProfile:
+      type: RuntimeDefault
+
+  containers:
+    - name: nginx
+      image: nginx:stable
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        readOnlyRootFilesystem: true
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop: ["ALL"]
+        seccompProfile:
+          type: RuntimeDefault
