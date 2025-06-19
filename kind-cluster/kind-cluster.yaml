@@ -6,7 +6,7 @@ kubeadmConfigPatches:
     apiServer:
       authorizationMode: "RBAC"
       extraArgs:
-        enable-admission-plugins: "NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,DefaultIngressClass,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota,PodSecurity"
+        enable-admission-plugins: "NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,DefaultIngressClass,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota,PodSecurity,DenyServiceExternalIPs"
         disable-admission-plugins: "AlwaysAdmit,AlwaysPullImages"
 
 nodes:
